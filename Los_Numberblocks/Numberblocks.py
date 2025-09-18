@@ -12,7 +12,6 @@ class Numberblock:
         self.valor = valor
         self.color = color
 
-        # ✅ Siempre lista
         if not isinstance(personalidades, list):
             raise TypeError("Las personalidades deben pasarse en una lista de strings.")
         self.personalidades = personalidades
