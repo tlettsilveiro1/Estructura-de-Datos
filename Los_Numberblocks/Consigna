@@ -1,0 +1,47 @@
+Los Numberblocks son personajes animados que forman parte de una serie educativa para niños. En esta actividad, vas a representar a estos personajes usando programación orientada a objetos.
+Cada Numberblock tiene un valor numérico entero positivo y su cuerpo está formado por
+esa cantidad de bloques.
+  Ejemplos:
+     - El Numberblock 1 tiene un solo bloque.
+     - El Numberblock 5 tiene cinco bloques.
+     - El Numberblock 10 tiene diez bloques.
+
+Cada Numberblock tiene un color, y una personalidad que se definen al momento de crear el Numberblock.
+La personalidad puede incluir uno o más atributos como: lindo, amable, talentoso, romántico. 
+
+Los colores posibles son: violeta, rojo, naranja, amarillo o verde.
+
+Al crearse, cada Numberblock debe presentarse indicando su número y color. Además, si su valor es un cuadrado perfecto (todo número que se puede representar como el cuadrado de un número entero), debe anunciarlo con orgullo:
+
+"Soy el número 25, soy rojo. Soy un cuadrado perfecto."  
+“Soy el número 24, soy naranja.”
+
+Un Numberblock puede replicarse (como si se viera en un espejo), devolviendo una copia exacta de sí mismo. Esto implica que el replicado es igual a la réplica.
+
+Ejemplo:
+    nb_3_rep = nb_3.replicar() 
+    nb_3_rep == nb_3 devuelve True
+Los Numberblocks pueden combinarse entre sí (como una suma). Si el resultado de la combinación ya existe, se devuelve una réplica del existente. Si no existe, se crea un nuevo Numberblock que adquiere indistintamente el color de uno de los padres y la personalidad del otro. 
+Ejemplo:
+    nb_7 = nb_3.combinar_con(nb_4) 
+Debe ser posible consultar la personalidad de cualquier Numberblock. (P5)
+Ejemplo:
+    nb3.personalidad()
+
+Resultado esperado:
+Curioso
+Entusiasta
+Independiente
+Incluir una funcionalidad “personajes” que muestre todos los Numberblocks creados. y ordenados de menor a mayor.
+Los Rebelblocks son Numberblocks especiales con las siguientes reglas.
+- Sólo admiten valores enteros negativos.  
+-Deben tener un solo color pero no debe estar en la lista de colores de los Numberblocks comunes. 
+- No se pueden replicar ni combinar. 
+- Al presentarse, deben mofarse de su negatividad: 'Soy -3, y me jacto de ser negativo.' 
+- Solo puede existir una instancia de cada Rebelblock.
+____________________________________________________________________________________________________________________________
+
+Requisitos del programa
+- Implementar todos los comportamientos mencionados usando POO (Programación Orientada a Objetos).
+- Validar correctamente los datos al momento de crear Numberblocks y Rebelblocks.
+- Llevar un registro de todos los personajes creados (debe incluir los originales y las réplicas). 
