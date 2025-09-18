@@ -1,5 +1,4 @@
 import math
-
 class Numberblock:
     _creados = {}   # Diccionario para guardar instancias creadas (clave: valor numérico)
 
@@ -80,7 +79,7 @@ class Rebelblock(Numberblock):
         return instancia
 
     def __init__(self, valor, color, personalidades=None):
-        # ⚠️ No usamos validaciones de Numberblock
+        #No usamos validaciones de Numberblock
         self.valor = valor
         self.color = color
         if personalidades is None:
