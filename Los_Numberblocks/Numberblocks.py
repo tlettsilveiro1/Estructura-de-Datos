@@ -101,26 +101,32 @@ class Rebelblock(Numberblock):
         raise Exception("Los Rebelblocks no pueden combinarse.")
 
 
+try:
+    nb3 = Numberblock(3, "rojo", ["Curioso"])
+    nb4 = Numberblock(4, "naranja", ["Entusiasta"])
+    nb5 = Numberblock(5, "amarillo", ["Independiente", "Romántico"])
 
-nb3 = Numberblock(3, "rojo", ["Curioso"])
-nb4 = Numberblock(4, "naranja", ["Entusiasta"])
-nb5 = Numberblock(5, "amarillo", ["Independiente", "Romántico"])
+    print("\n--- Personalidad nb5 ---")
+    nb5.personalidad()
 
-print("\n--- Personalidad nb5 ---")
-nb5.personalidad()
+    print("\n--- Replicación ---")
+    nb3_rep = nb3.replicar()
+    print(nb3_rep == nb3)   # True
 
-print("\n--- Replicación ---")
-nb3_rep = nb3.replicar()
-print(nb3_rep == nb3)   # True
+    print("\n--- Combinación ---")
+    nb7 = nb3.combinar_con(nb4)
+    print(nb7.valor, nb7.color)
 
-print("\n--- Combinación ---")
-nb7 = nb3.combinar_con(nb4)
-print(nb7.valor, nb7.color)
+    print("\n--- Personajes creados ---")
+    Numberblock.personajes()
 
-print("\n--- Personajes creados ---")
-Numberblock.personajes()
+    print("\n--- Rebelblocks ---")
+    rb1 = Rebelblock(-3, "negro", ["Rebelde"])
+    rb2 = Rebelblock(-3, "negro")  # misma instancia
+    print(rb1 is rb2)  # True
 
-print("\n--- Rebelblocks ---")
-rb1 = Rebelblock(-3, "negro", ["Rebelde"])
-rb2 = Rebelblock(-3, "negro")  # misma instancia
-print(rb1 is rb2)  # True
+except ValueError:
+    print("Error: El poder debe ser un número entero.")
+
+except Exception as e:
+    print("Ocurrió un error inesperado:", e) #Error generico
