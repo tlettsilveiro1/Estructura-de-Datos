@@ -1,22 +1,28 @@
 import math
 class Numberblock:
-    _creados = {}   # Diccionario para guardar instancias creadas (clave: valor numérico)
+    _creados = {}   # Diccionario para guardar todas las instancias (clave: valor numérico)
 
     def __init__(self, valor, color, personalidades):
         if valor <= 0:
             raise ValueError("El valor debe ser un entero positivo.")
         if color not in ["violeta", "rojo", "naranja", "amarillo", "verde"]:
             raise ValueError("Color inválido para un Numberblock común.")
-
         self.valor = valor
         self.color = color
-
         if not isinstance(personalidades, list):
             raise TypeError("Las personalidades deben pasarse en una lista de strings.")
         self.personalidades = personalidades
-
-        Numberblock._creados[valor] = self
         self.presentarse()
+        #En este caso se utiliza el metodo crear para agregar el personaje al diccionario, sino se usaria "Numberblock._creados[valor] = self"
+
+    @classmethod
+    def crear(cls, valor, color, personalidades):
+        """Valida si ya existe un personaje con ese valor. Si existe lo devuelve, sino lo crea."""
+        if valor in cls._creados:
+            return cls._creados[valor]
+        nuevo = cls(valor, color, personalidades)
+        cls._creados[valor] = nuevo
+        return nuevo
 
     def presentarse(self):
         if self.es_cuadrado():
@@ -30,26 +36,23 @@ class Numberblock:
 
     def replicar(self):
         # Devuelve un nuevo Numberblock idéntico
-        return Numberblock(self.valor, self.color, self.personalidades[:])
+        return Numberblock.crear(self.valor, self.color, self.personalidades[:])
 
     def __eq__(self, otro):
         return isinstance(otro, Numberblock) and \
                self.valor == otro.valor and \
                self.color == otro.color and \
-               self.personalidades == otro.personalidades
+               self.personalidades == otro.personalidades #la "\" sirve para avisar que el codigo sigue en la siguiente linea
 
     def combinar_con(self, otro):
         if not isinstance(otro, Numberblock):
             raise ValueError("Solo se pueden combinar Numberblocks.")
-
         nuevo_valor = self.valor + otro.valor
-
         if nuevo_valor in Numberblock._creados:
             return Numberblock._creados[nuevo_valor].replicar()
-
         nuevo_color = self.color
         nueva_personalidad = otro.personalidades[:]
-        return Numberblock(nuevo_valor, nuevo_color, nueva_personalidad)
+        return Numberblock.crear(nuevo_valor, nuevo_color, nueva_personalidad)
 
     def personalidad(self):
         for p in self.personalidades:
@@ -63,23 +66,21 @@ class Numberblock:
 
 
 class Rebelblock(Numberblock):
-    _instancias = {}  # Solo una por valor
 
-    def __new__(cls, valor, color, personalidades=None):
+    @classmethod
+    def crear(cls, valor, color, personalidades=None):
+        """Valida y crea un Rebelblock único por valor."""
         if valor >= 0:
             raise ValueError("Un Rebelblock debe tener valor negativo.")
         if color in ["violeta", "rojo", "naranja", "amarillo", "verde"]:
             raise ValueError("Color inválido para un Rebelblock.")
-
-        if valor in cls._instancias:
-            return cls._instancias[valor]
-
-        instancia = super().__new__(cls)
-        cls._instancias[valor] = instancia
-        return instancia
+        if valor in cls._creados:
+            return cls._creados[valor]
+        nuevo = cls(valor, color, personalidades)
+        cls._creados[valor] = nuevo
+        return nuevo
 
     def __init__(self, valor, color, personalidades=None):
-        #No usamos validaciones de Numberblock
         self.valor = valor
         self.color = color
         if personalidades is None:
@@ -100,10 +101,11 @@ class Rebelblock(Numberblock):
         raise Exception("Los Rebelblocks no pueden combinarse.")
 
 
+# ==================== EJEMPLO DE USO ====================
 try:
-    nb3 = Numberblock(3, "rojo", ["Curioso"])
-    nb4 = Numberblock(4, "naranja", ["Entusiasta"])
-    nb5 = Numberblock(5, "amarillo", ["Independiente", "Romántico"])
+    nb3 = Numberblock.crear(3, "rojo", ["Curioso"])    #el crear chequea que el numberblock no exista y haya uno solo unico
+    nb4 = Numberblock.crear(4, "naranja", ["Entusiasta"])
+    nb5 = Numberblock.crear(5, "amarillo", ["Independiente", "Romántico"])
 
     print("\n--- Personalidad nb5 ---")
     nb5.personalidad()
@@ -120,12 +122,12 @@ try:
     Numberblock.personajes()
 
     print("\n--- Rebelblocks ---")
-    rb1 = Rebelblock(-3, "negro", ["Rebelde"])
-    rb2 = Rebelblock(-3, "negro")  # misma instancia
+    rb1 = Rebelblock.crear(-3, "negro", ["Rebelde"])
+    rb2 = Rebelblock.crear(-3, "negro")  # misma instancia
     print(rb1 is rb2)  # True
 
-except ValueError:
-    print("Error: El poder debe ser un número entero.")
+except ValueError as e:
+    print("Error de valor:", e)
 
 except Exception as e:
-    print("Ocurrió un error inesperado:", e) #Error generico
+    print("Ocurrió un error inesperado:", e)  # Error genérico
