@@ -14,10 +14,10 @@ class Mano:
         self.nombre = nombre
         self.estado = None
 
-    def seleccionar(self):
+    def seleccionar(self):   #jugador piensa
         self.estado = choice(Mano.opciones)
 
-    def mostrar(self):
+    def mostrar(self):       #jugador muestra
         return self.estado
 
     def get_nombre(self):
