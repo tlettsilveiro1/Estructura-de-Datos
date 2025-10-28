@@ -40,26 +40,25 @@ class ListaEnlazada:
         self.cabeza = None
 
     def agregar(self, estudiante):
-        """ Agrega estudiantes ordenados por apellido """
-        nuevo_nodo = NodoEstudiante(estudiante)
-        if self.cabeza is None or estudiante.apellido.lower() < self.cabeza.estudiante.apellido.lower():
-            # insertar al inicio
+        """ Agrega estudiantes ordenados alfabeticamente por apellido """ # "suponer que en la lista esta Ana(cabeza) y Carlos"
+        nuevo_nodo = NodoEstudiante(estudiante) #"Beatriz"
+        # 1️⃣ Caso 1: lista vacía o insertar al inicio
+        if self.cabeza is None or estudiante.apellido.lower() < self.cabeza.estudiante.apellido.lower(): # "Beatriz < Ana"
             nuevo_nodo.siguiente = self.cabeza
             self.cabeza = nuevo_nodo
             return
-
-        actual = self.cabeza
-        while actual.siguiente and actual.siguiente.estudiante.apellido.lower() < estudiante.apellido.lower():
+        # 2️⃣ Caso 2: recorrer para encontrar la posición correcta, la primera condicion esta paraque pueda ir ultimo 
+        actual = self.cabeza #"Ana"
+        while actual.siguiente and actual.siguiente.estudiante.apellido.lower() < estudiante.apellido.lower(): #"Carlos" y "Carlos < Beatriz"
             actual = actual.siguiente
-
-        # insertar después de actual
-        nuevo_nodo.siguiente = actual.siguiente
-        actual.siguiente = nuevo_nodo
+        # 3️⃣ Insertar después de "actual"
+        nuevo_nodo.siguiente = actual.siguiente #"Carlos"
+        actual.siguiente = nuevo_nodo #"beatriz", aunque sea una var. local se pueden hacer cambios permanentes ya que es una referencia al nodo (no copia)
 
     def eliminar(self, legajo):
         """ Elimina estudiante dado su legajo """
         actual = self.cabeza
-        anterior = None
+        anterior = None #Necesario guardar el anterior para hacer la coneccion entre nodos cuando se elimina
 
         while actual:
             if actual.estudiante.legajo == legajo:
@@ -68,11 +67,11 @@ class ListaEnlazada:
                 else:
                     self.cabeza = actual.siguiente
                 print(f"Estudiante con legajo {legajo} eliminado.")
-                return True
+                return True #El 'True' no es necesario, ya que cuando se ejecuta no se asigna a ninguna variable
             anterior = actual
             actual = actual.siguiente
         print(f"No se encontró estudiante con legajo {legajo}.")
-        return False
+        return False #El 'False' no es necesario, ya que cuando se ejecuta no se asigna a ninguna variable
 
     def mostrar_materias_promedio(self):
         """ Muestra la materia y el promedio de todos los estudiantes """

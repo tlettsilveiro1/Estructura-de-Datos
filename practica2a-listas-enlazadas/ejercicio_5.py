@@ -36,7 +36,7 @@ class ListaReproduccion:
                     anterior.siguiente = actual.siguiente
                 else:
                     self.cabeza = actual.siguiente
-                self.tamanio -= 1
+                self.tamanio -= 1 #Otra forma de restar 1(uno) a una variable
                 print(f"Canción '{titulo}' eliminada.")
                 return True
             anterior = actual
