@@ -1,4 +1,6 @@
-# Ejercicio 5: Apilar cartas con reglas
+# Ejercicio 5: Apilar cartas con reglas (usando deque)
+from collections import deque   # Importamos deque para manejar la pila de forma eficiente
+
 # Clase que representa una carta individual
 class Carta:
     def __init__(self, numero, palo):
@@ -12,7 +14,7 @@ class Carta:
 # Clase que representa la pila de cartas
 class PilaDeCartas:
     def __init__(self):
-        self.cartas = []   # lista usada como pila
+        self.cartas = deque()   # deque usado como pila (estructura LIFO)
 
     # Método para apilar una carta bajo las condiciones del ejercicio
     def apilar(self, carta):
@@ -21,7 +23,7 @@ class PilaDeCartas:
             self.cartas.append(carta)
         else:
             # Obtener la carta que está actualmente en la cima
-            carta_superior = self.cartas[-1]
+            carta_superior = self.cartas[-1]  # el último elemento del deque
 
             # Validar las condiciones:
             # 1. La nueva carta debe tener número inferior en 1
@@ -41,12 +43,13 @@ class PilaDeCartas:
             return "La pila está vacía."
         else:
             texto = "🃏 Pila de cartas:\n"
-            for i in range(len(self.cartas) - 1, -1, -1):  # mostrar desde la cima
-                texto += f" -> {self.cartas[i]}\n"
+            # Recorremos desde la cima hacia abajo (de derecha a izquierda)
+            for carta in reversed(self.cartas):
+                texto += f" -> {carta}\n"
             return texto
 
 
-
+# Bloque principal de prueba
 try:
     pila = PilaDeCartas()
 

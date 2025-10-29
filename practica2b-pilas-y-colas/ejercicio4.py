@@ -1,20 +1,22 @@
-# Ejercicio 4: Atención de pacientes en consultorio
+# Ejercicio 4: Atención de pacientes en consultorio usando deque
+from collections import deque
+
 # Clase que representa una cola de pacientes
 class ColaDePacientes:
     def __init__(self):
-        self.cola = []  # Usamos una lista para almacenar los nombres
+        self.cola = deque()  # Usamos deque para almacenar los nombres
 
     # Agregar un nuevo paciente al final de la cola
     def encolar(self, nombre):
         self.cola.append(nombre)
         print(f"✅ Paciente '{nombre}' agregado a la cola.")
 
-    # Atender al siguiente paciente (quitar el primero de la lista)
+    # Atender al siguiente paciente (quitar el primero de la cola)
     def proximo_paciente(self):
         if self.es_vacia():
             print("🏥 No hay pacientes en espera.")
             return None
-        siguiente = self.cola.pop(0)
+        siguiente = self.cola.popleft()  # popleft() elimina el primer elemento de manera eficiente
         print(f"➡️ Llamando al paciente: {siguiente}")
         return siguiente
 
@@ -28,12 +30,14 @@ class ColaDePacientes:
             print("🏥 No hay pacientes en la sala de espera.")
         else:
             print("\n👥 Pacientes en espera:")
-            for i in range(len(self.cola)):
-                print(f"{i+1}. {self.cola[i]}")
-            print()
+            indice = 1
+            for paciente in self.cola:
+                print(f"{indice}. {paciente}")
+                indice += 1
+            print() #Sirve para generar un reglon vacio
 
 
-
+# Función de menú principal
 def menu():
     print("\n--- SISTEMA DE COLA DE PACIENTES ---")
     print("1. Ingresar nuevo paciente")
@@ -44,7 +48,7 @@ def menu():
 # Crear la cola de pacientes
 cola = ColaDePacientes()
 
-# Bucle principal
+# Bucle principal del programa
 while True:
     menu()
     opcion = input("Seleccione una opción: ")

@@ -1,4 +1,4 @@
-# Ejercicio 6: Sublista más larga de números consecutivos
+# Ejercicio 6: Sublista más larga de números consecutivos (no se usa pilas, colas ni tuplas)
 def sublista_consecutivos_mas_larga(lista):
     if len(lista) == 0:
         return []

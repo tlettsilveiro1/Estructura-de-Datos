@@ -1,4 +1,6 @@
-# Ejercicio 1: Implementación de la clase Pila
+# Ejercicio 1: Implementación de la clase Pila (usando deque)
+from collections import deque   # Importamos deque para manejar la pila de forma eficiente
+
 # Clase que representa un libro
 class Libro:
     def __init__(self, autor, fecha_publicacion, editorial, issn):
@@ -11,35 +13,30 @@ class Libro:
         return f"{self.autor} | {self.fecha_publicacion} | {self.editorial} | ISSN: {self.issn}"
 
 
-# Clase que representa un nodo de la pila
-class Nodo:
-    def __init__(self, dato):
-        self.dato = dato     # guarda el libro
-        self.siguiente = None  # referencia al nodo inferior
-
-
-# Clase principal: la pila (graficamente se ve asi: Cima → [B] → [A] → None)
+# Clase principal: la pila (gráficamente se ve así: Cima → [B] → [A])
+# Usamos deque en lugar de nodos enlazados, pero la lógica de pila (LIFO) se mantiene igual.
 class Pila:
     def __init__(self):
-        self.cima = None   # referencia al nodo superior
+        self.cima = deque()   # Inicializamos la pila vacía con deque
 
     # Método para verificar si la pila está vacía
     def es_vacia(self):
-        return self.cima is None
+        return len(self.cima) == 0
 
     # Método para apilar un libro (agregar al tope)
     def apilar(self, libro):
-        nuevo_nodo = Nodo(libro)
-        nuevo_nodo.siguiente = self.cima  #Hace que el nuevo nodo apunte al nodo que antes era la cima.
-        self.cima = nuevo_nodo            #Ahora el nuevo es la cima
+        # append() agrega al final del deque, que representa la "cima" de la pila
+        self.cima.append(libro)
+        # Hace el mismo trabajo que el enlace de nodos en la versión anterior,
+        # pero internamente deque ya maneja la referencia al último elemento.
 
     # Método para desapilar (quitar y devolver el libro del tope)
     def desapilar(self):
         if self.es_vacia():
             print("La pila está vacía, no se puede desapilar.")
             return None
-        libro = self.cima.dato            # obtener el libro de la cima
-        self.cima = self.cima.siguiente   # mover la cima hacia abajo
+        # pop() elimina y devuelve el último elemento agregado (la cima de la pila)
+        libro = self.cima.pop()
         return libro
 
     # Método para visualizar toda la pila
@@ -47,12 +44,11 @@ class Pila:
         if self.es_vacia():
             print("La pila está vacía.")
         else:
-            actual = self.cima
             print("📚 Pila de libros:")
-            while actual is not None:
-                print(" ->", actual.dato)
-                actual = actual.siguiente
-
+            # Recorremos el deque desde la cima hacia la base (de derecha a izquierda)
+            for libro in reversed(self.cima):
+                print(" ->", libro)
+            # Esto reemplaza el recorrido manual de nodos en la versión anterior
 
 
 # Crear algunos libros

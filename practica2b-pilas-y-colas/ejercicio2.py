@@ -1,4 +1,6 @@
-# Ejercicio 2: Implementación de la clase Cola
+# Ejercicio 2: Implementación de la clase Cola (usando deque)
+from collections import deque   # Importamos deque para manejar colas de forma eficiente
+
 # Clase que representa a una persona que espera para votar
 class Persona:
     def __init__(self, nombre, dni, mesa):
@@ -10,21 +12,25 @@ class Persona:
         return f"{self.nombre} (DNI: {self.dni}, Mesa: {self.mesa})"
 
 
-# Clase que representa una cola usando una lista (graficamente se ve asi:  [A](frente) — [B] — [C](Final) )
+# Clase que representa una cola usando deque 
+# (gráficamente se ve así: [A](frente) — [B] — [C](final))
 class Cola:
     def __init__(self):
-        self.elementos = []  # lista interna que guarda las personas
+        self.elementos = deque()  # deque interno que guarda las personas
 
     # Agrega una persona al final de la cola
     def encolar(self, persona):
         self.elementos.append(persona)
+        # append() agrega un elemento al final de la cola (igual que en la lista),
+        # pero deque es más eficiente para insertar y eliminar al principio o final.
 
     # Elimina y devuelve la primera persona de la cola
     def desencolar(self):
         if self.es_vacia():
             print("La cola está vacía, no hay nadie para atender.")
             return None
-        return self.elementos.pop(0)
+        # popleft() elimina el primer elemento de la cola (el que está al frente)
+        return self.elementos.popleft()
 
     # Devuelve True si la cola está vacía
     def es_vacia(self):
@@ -36,6 +42,7 @@ class Cola:
             print("La cola está vacía.")
         else:
             print("🧍‍♀️🧍‍♂️ Cola de personas esperando para votar:")
+            # Recorremos el deque en orden (del frente al final)
             for persona in self.elementos:
                 print(" ->", persona)
 

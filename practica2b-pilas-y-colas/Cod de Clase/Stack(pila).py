@@ -1,7 +1,7 @@
-from typing import Any, Optional
+from typing import Any, Optional #usado para anotar tipos(no obligatorio, pero sirve para documentación o chequeo estático)
 from nodo import Nodo
 
-class Stack:
+class Stack: #PILA
     def __init__(self):
         self.top: Optional[Nodo] = None
         self.length: int = 0
@@ -25,7 +25,8 @@ class Stack:
             self.length -= 1
             return dato
         self.top = self.top.get_ant()
-        if self.top : self.top.set_sig(None)
+        if self.top: 
+            self.top.set_sig(None)
         self.length -= 1
         return dato
 
@@ -64,6 +65,6 @@ def validar_parentesis(parentesis: str):
 
 
 if __name__ == "__main__":
-    validar_parentesis("()((()))()")
-    validar_parentesis(")()()(")
-    validar_parentesis(")))))))))))))))")
+    validar_parentesis("()((()))()") #Balanceado
+    validar_parentesis(")()()(") #Desbalanceado
+    validar_parentesis(")))))))))))))))") #Desbalanceado
