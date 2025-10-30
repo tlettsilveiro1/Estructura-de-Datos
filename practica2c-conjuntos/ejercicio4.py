@@ -10,7 +10,7 @@ def calcular_felicidad(lista, conjuntoA, conjuntoB):
     return felicidad
 
 
-def main():
+def main1():
     # Ejemplo de datos
     lista = [1, 2, 3, 4, 5, 6, 7]
     conjuntoA = {1, 3, 5}
@@ -20,7 +20,7 @@ def main():
     print("Mi estado de felicidad es:", estado_felicidad)
 
 # Ejecutamos el programa
-main()
+main1()
 #-----------------------------------------0------------------------------------------------
 # Ejercicio 4 (resolucion intectiva)
 def leer_conjunto_o_lista(mensaje):
@@ -50,7 +50,7 @@ def calcular_felicidad(lista, conjuntoA, conjuntoB):
     return felicidad
 
 
-def main():
+def main2():
     print("=== Calculadora de felicidad ===")
 
     lista = list(leer_conjunto_o_lista("Ingrese la lista de números (separados por espacios): "))
@@ -61,4 +61,4 @@ def main():
     print("\nTu estado de felicidad es:", estado_felicidad)
 
 # Ejecutamos el programa
-main()
+main2()

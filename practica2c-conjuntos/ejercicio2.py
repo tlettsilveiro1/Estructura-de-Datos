@@ -31,7 +31,7 @@ def cargar_hoteles():
             idHotel = int(input("Ingrese el ID del hotel (número único): "))
         except ValueError:
             print("ID debe ser un número entero. Intente nuevamente.")
-            continue
+            continue #Se usa para que se repita el while otra vez, evita que siga (salta al siguiente ciclo)
 
         zona = input("Ingrese la zona del hotel (playa/montaña/rural): ").lower()
         if zona not in ["playa", "montaña", "rural"]:

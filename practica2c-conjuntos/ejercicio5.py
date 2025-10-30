@@ -2,7 +2,7 @@
 class Cliente:
     def __init__(self, nombre, productos=None):
         self.nombre = nombre
-        if productos is None:
+        if productos is None: #la creacion del set solo ocurre la primera vez (momento que se crea el objeto)
             self.productos = set()
         else:
             self.productos = set(productos)  # Convertimos a set por seguridad
@@ -23,7 +23,7 @@ class Tienda:
             self.clientes[nombre].agregar_productos(productos)
         else:
             # Si no existe, creamos un nuevo cliente
-            self.clientes[nombre] = Cliente(nombre, productos)
+            self.clientes[nombre] = Cliente(nombre, productos) #se repite el nombre, una como clave de acceso rápida y otra como parte de los datos del cliente.
 
     def producto_mas_comprado(self):
         contador_productos = {}

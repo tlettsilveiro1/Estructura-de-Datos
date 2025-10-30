@@ -7,7 +7,7 @@ class Equipo:
         self.goles_a_favor = 0
         self.goles_en_contra = 0
 
-    def registrar_partido(self, goles_favor, goles_contra):
+    def registrar_partido(self, goles_favor, goles_contra): #Se hace cada equipo por separado, en un partido se hace dos veces
         self.goles_a_favor += goles_favor
         self.goles_en_contra += goles_contra
         if goles_favor > goles_contra:
@@ -36,11 +36,11 @@ class Campeonato:
         equipoA.registrar_partido(golesA, golesB)
         equipoB.registrar_partido(golesB, golesA)
 
-        # Guardamos el partido en la lista
+        # Guardamos el partido en la lista como una tupla
         self.partidos.append((nombreA, nombreB, golesA, golesB))
 
     def equipo_con_mas_victorias(self):
-        max_victorias = -1
+        max_victorias = -1 #se pone (-1) para que se pueda usar (>) y no se cambie cuando el siguiente es igual
         equipo_max = None
         for equipo in self.equipos.values():
             if equipo.victorias > max_victorias:
@@ -55,7 +55,7 @@ class Campeonato:
         return resultado
 
     def partidos_empatados(self):
-        empates = []
+        empates = [] # Lista de tuplas (solo partidos empatados): (equipoA, equipoB, golesA, golesB)
         for partido in self.partidos:
             if partido[2] == partido[3]:  # golesA == golesB
                 empates.append(partido)
@@ -67,15 +67,14 @@ class Campeonato:
 
         victoriasA = 0
         victoriasB = 0
-
         for partido in self.partidos:
-            eqA, eqB, golesA, golesB = partido
+            eqA, eqB, golesA, golesB = partido #asignacion multiple
             if (eqA == nombreA and eqB == nombreB):
                 if golesA > golesB:
                     victoriasA += 1
                 elif golesB > golesA:
                     victoriasB += 1
-            elif (eqA == nombreB and eqB == nombreA):
+            elif (eqA == nombreB and eqB == nombreA): #chequear que el partido no este guardado alreves
                 if golesB > golesA:
                     victoriasA += 1
                 elif golesA > golesB:

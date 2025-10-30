@@ -7,13 +7,13 @@ class Persona:
     def __str__(self):
         return f"Persona(nombre={self.nombre}, id={self.id}, edad={self.edad})"
     
-    # Necesario para que la persona pueda estar en un set
-    def __eq__(self, other):
+    # Necesario para que la persona pueda estar en un set (si se usa "__eq__", si o si se debe usar "__hash__")
+    def __eq__(self, other): #es necesario para hacer la comparacion entre personas, y sepa que variable usar para comparar
         if isinstance(other, Persona):
             return self.id == other.id  # Consideramos que el ID es único
         return False
 
-    def __hash__(self):
+    def __hash__(self): #Cuando se guardar en un set, es necesario guardar toda la informacion en un elemento
         return hash(self.id)  # Usamos el ID para calcular el hash
 
 
