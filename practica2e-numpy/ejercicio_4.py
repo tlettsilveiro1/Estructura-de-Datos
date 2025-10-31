@@ -9,6 +9,5 @@ A = np.array([
 
 # Calcular la inversa con NumPy
 inversa = np.linalg.inv(A)
-
 print("Matriz original:\n", A)
 print("\nMatriz inversa:\n", inversa)

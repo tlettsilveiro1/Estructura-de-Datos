@@ -1,22 +1,24 @@
+import numpy as np
+
 def es_triangular_superior(matriz):
-    filas = len(matriz)
-    columnas = len(matriz[0])
-
-    # 1️⃣ Comprobar si es cuadrada
-    if filas != columnas:
+    # Convertimos a arreglo NumPy (por si viene como lista)
+    matriz = np.array(matriz)
+    
+    # Verificamos que sea cuadrada
+    if matriz.shape[0] != matriz.shape[1]: #compara los valores de la tupla (que sean iguales)
         print("La matriz no es cuadrada")
-        return
-
-    # 2️⃣ Verificar los elementos por debajo de la diagonal principal
-    for i in range(filas):
-        for j in range(columnas):
-            # condición: estamos debajo de la diagonal cuando i > j
-            if i > j and matriz[i][j] != 0:
-                print("No es triangular superior")
-                return
-
-    # 3️⃣ Si no se encontró ningún número debajo de la diagonal ≠ 0
-    print("Es triangular superior")
+        return False
+    
+    # Creamos una matriz con los elementos por debajo de la diagonal principal
+    debajo_diagonal = np.tril(matriz, k=-1)   # 'tril' = triangular inferior y '-1' mueve la diagonal hacia abajo
+    
+    # Verificamos si todos los elementos debajo de la diagonal son 0
+    if np.all(debajo_diagonal == 0):
+        print("Es triangular superior")
+        return True
+    else:
+        print("No es triangular superior")
+        return False
 
 
 M = [

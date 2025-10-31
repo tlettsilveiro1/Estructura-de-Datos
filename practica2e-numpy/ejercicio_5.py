@@ -8,5 +8,4 @@ B = np.array([[7, 8, 9],
               [1, 2, 3]])
 
 C = A + B
-
 print("Suma de matrices con NumPy:\n", C)

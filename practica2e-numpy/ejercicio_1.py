@@ -1,30 +1,20 @@
-def son_vectores_iguales(vectora, vectorb):
-    # 1 Verificar que tengan la misma longitud
-    if len(vectora) != len(vectorb):
-        print("Los dos vectores NO son iguales")
-        return
-    
-    # 2 Crear una nueva lista con los cuadrados de los elementos de vectora
-    cuadrados = []
-    for elemento in vectora:
-        cuadrados.append(elemento ** 2)
-    
-    # 3 Ordenar ambos vectores (para ignorar el orden)
-    cuadrados.sort()
-    vectorb.sort()
-    
-    # 4 Comparar elemento a elemento
-    iguales = True
-    for i in range(len(cuadrados)):
-        if cuadrados[i] != vectorb[i]:
-            iguales = False
-            break
-    
-    # 5 Mostrar el resultado
-    if iguales:
-        print("Los dos vectores son iguales")
-    else:
-        print("Los dos vectores NO son iguales")
+import numpy as np
+
+def son_vectores_iguales(v1, v2):
+    # Convertimos las listas a arrays de NumPy
+    arr1 = np.array(v1)
+    arr2 = np.array(v2)
+
+    # Elevamos al cuadrado el primero y el segundo, el "**" significa elevado
+    cuadrado1 = arr1 ** 2
+    cuadrado2 = arr2 ** 2
+
+    # Ordenamos ambos (para que no importe el orden)
+    cuadrado1_ordenado = np.sort(cuadrado1)
+    cuadrado2_ordenado = np.sort(cuadrado2)
+
+    # Comparamos: uno debe ser igual al cuadrado del otro
+    print(np.array_equal(cuadrado1_ordenado, np.sort(arr2)) or np.array_equal(cuadrado2_ordenado, np.sort(arr1)))
 
 
 vectora = [121, 144, 19, 161, 19, 144, 19, 11] 
