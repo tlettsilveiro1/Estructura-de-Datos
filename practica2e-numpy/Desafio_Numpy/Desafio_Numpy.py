@@ -74,13 +74,14 @@ print(min(np.mean(produccion, axis = 0 )))
 print('Desvio Estandard: ', np.std(produccion,axis= 1))
 print('menor desvio: ',min(np.std(produccion,axis= 1)))
 print('Lineas que cumplieron el objetivo: ',np.where(produccion >= 150))
+print('Lineas que cumplieron el objetivo: ',produccion[np.where(produccion >= 150)]) #sirve para que te de los numeros (en un vector)
 
 # 5. Calcular la desviación estándar de cada línea (indica consistencia)
 desviacion_estandar_linea = np.std(produccion, axis=0)
 print("Desviación estándar por línea:", desviacion_estandar_linea)
 
 # 6. Identificar cuál línea es más consistente (menor desviación)
-linea_mas_consistente_index = np.argmin(desviacion_estandar_linea)
+linea_mas_consistente_index = np.argmin(desviacion_estandar_linea) #Devuelve la posicion del argunmento minimo
 linea_mas_consistente = lineas[linea_mas_consistente_index]
 print("La línea más consistente es:", linea_mas_consistente)
 
@@ -354,7 +355,7 @@ almacen_mayor_volumen = almacenes[np.argmax(stock_total_almacen)]
 producto_menor_stock = productos[np.argmin(stock_total_producto)]
 
 # --- Nivel 2 ---
-valor_inventario_almacen = inventario @ precios
+valor_inventario_almacen = inventario @ precios #producto matricial
 valor_inventario_producto = stock_total_producto * precios
 almacen_mayor_valor = almacenes[np.argmax(valor_inventario_almacen)]
 
