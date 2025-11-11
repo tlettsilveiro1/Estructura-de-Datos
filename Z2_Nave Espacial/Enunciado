@@ -1,0 +1,48 @@
+"""
+Control de Navegación en Nave Espacial
+Contexto:
+Se necesita implementar parte de un sistema de control para una nave espacial que
+guarda las coordenadas visitadas en orden para poder regresar y rastrear su
+recorrido. Además, el sistema deberá poder deshacer las últimas maniobras
+realizadas por el piloto para corregir errores de navegación.
+
+Requisitos Funcionales:
+1. Almacenar las coordenadas visitadas en el orden en que fueron recorridas.
+2. Permitir obtener la secuencia completa actual de coordenadas.
+3. Permitir deshacer la última maniobra retornando a la coordenada previa.
+4. Soportar la gestión eficiente de deshacer/repetir maniobras.
+"""
+# Código Dado:
+# class NaveEspacial:
+# def __init__(self):
+# self._recorrido = [] # Lista para guardar coordenadas
+# self._historial_acciones = [] # Registro de maniobras para deshacer
+# def agregar_coordenada(self, coordenada):
+# """
+# Añade una nueva coordenada visitada.
+# :param coordenada: tupla con (x, y, z)
+# """
+# # Completar: agregar coordenada al recorrido y registrar acción para posible
+# deshacer
+# def obtener_recorrido(self):
+# """Devuelve la secuencia de coordenadas visitadas en orden."""
+# return self._recorrido
+# def deshacer_maniobra(self):
+# """
+# Revierten la última maniobra y actualiza el recorrido.
+# """
+# # Completar: lógica para deshacer la última coordenada añadida
+"""
+Casos de Prueba:
+Caso 1: Agregar tres coordenadas y obtener recorrido
+Entrada: agregar (0,0,0), (1,1,1), (2,2,2)
+Salida esperada: [(0,0,0), (1,1,1), (2,2,2)]
+Caso 2: Deshacer última maniobra después de agregar 3 coordenadas
+Entrada: deshacer_maniobra tras añadir tres coordenadas
+Salida esperada: [(0,0,0), (1,1,1)]
+Caso 3: Obtener recorrido después de agregar y deshacer múltiples maniobras
+Entrada: agregar (3,3,3), deshacer_maniobra, agregar (4,4,4)
+Salida esperada: [(0,0,0), (1,1,1), (4,4,4)]
+Control de Navegación en Nave Espacial: Usa listas para recorrido e historial
+(listas simples) y pilas implícitas (último en procesar).
+"""

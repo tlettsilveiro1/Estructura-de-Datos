@@ -1,0 +1,27 @@
+Sistema de Atención al Cliente con Prioridades
+Contexto:
+Un centro de atención telefónica maneja llamadas de clientes que deben ser
+atendidas en estricto orden de llegada. Cada llamada tiene información que no
+cambia durante todo el proceso: el número de ticket, nombre del cliente, tipo de
+consulta y timestamp de cuándo llegó. Esta información debe permanecer intacta y
+no debe ser modificable una vez creada la llamada.
+El sistema tiene varios operadores que toman llamadas de una cola central. Cuando
+un operador queda libre, debe atender la siguiente llamada que está esperando hace
+más tiempo. El centro necesita saber en todo momento cuántas llamadas están
+esperando, cuál es la próxima llamada a atender (sin quitarla de la cola), y poder
+procesar llamadas de manera ordenada.
+Adicionalmente, el sistema debe generar reportes cada hora. Estos reportes
+contienen datos estadísticos que una vez generados no deben cambiar: el periodo
+del reporte (hora inicio y fin), cantidad de llamadas atendidas, tiempo promedio de
+espera, y el operador más activo. Esta información del reporte debe ser inmutable
+para mantener la integridad de los registros históricos.
+
+Requisitos Funcionales:
+1. Registrar una nueva llamada entrante en la cola de espera
+2. Asignar la siguiente llamada a un operador disponible (respetando orden de
+llegada)
+3. Consultar la próxima llamada sin quitarla de la cola
+4. Obtener el número de llamadas esperando
+5. Generar un reporte de estadísticas del periodo (datos inmutables)
+6. Consultar información de reportes históricos
+7. Verificar si hay llamadas en espera

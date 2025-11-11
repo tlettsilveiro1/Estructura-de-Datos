@@ -1,7 +1,7 @@
 from typing import Any, Optional #usado para anotar tipos(no obligatorio, pero sirve para documentación o chequeo estático)
 from nodo import Nodo
 
-class Stack: #PILA
+class Stack: #PILA, sin usar deque
     def __init__(self):
         self.top: Optional[Nodo] = None
         self.length: int = 0

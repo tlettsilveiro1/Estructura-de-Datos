@@ -1,0 +1,113 @@
+Sistema de Gestión de Reservas: “GymFlex”
+1. Objetivo Construir un sistema orientado a objetos que gestione reservas de clases,
+socios y membresías de un gimnasio. El sistema debe permitir:
+●Registrar socios.
+●Recibir y procesar solicitudes de reserva respetando el orden de llegada.
+●Gestionar tipos de membresías y sus descuentos asociados.
+●Generar estadísticas de asistencia e ingresos usando datos históricos.
+
+2. Estructura del sistema El sistema se modela mediante las siguientes clases. No es
+necesario validar los atributos, salvo que se indique explícitamente.
+
+2.1. Socio Representa a un cliente del gimnasio. Debe contener:
+●idSocio: int
+●nombre: str
+●apellido: str
+●ReservasRealizadas: registro de todas las reservas realizadas por el socio.
+
+2.2. SolicitudReserva Representa una solicitud que llega al sistema. Debe contener:
+●tipoDeClase: str — solo "yoga","spinning","funcional" o "pilates". Se podrán agregar más tipos en el futuro.
+●cantidadDePersonas: int
+●numeroDia: int entre 0 y 6, donde 0 = lunes y 6 = domingo.
+●idSocio: int — número de ID del socio que realiza la solicitud.
+
+2.3. Reserva Es el resultado de procesar una solicitud de reserva. Debe contener:
+●tipoDeClase: str (mismos valores que en la solicitud)
+●cantidadDePersonas: int
+●dia: str —"lunes" a "domingo".
+●idSocio: int — número de ID del socio que realizó la reserva.
+
+2.4. TipoMembresia Representa una categoría de membresía y su descuento. Debe
+contener:
+●nombreMembresia: str — nombre de la membresía (ej: "Bronce","Plata","Oro"), importante para identificarla.
+●descuento: int (ej: 10 para un 10%, 15 para un 15%). Las membresías puedenagregarse, eliminarse o modificarse constantemente.
+
+3. Acciones del sistema
+
+3.1. Agregar un socio Solo puede existir un socio por idSocio. Este dato se usará para
+buscar socios en el sistema. sistema.agregar_socio(socio)
+
+3.2. Cargar solicitudes Las solicitudes de reserva del día se reciben en una lista
+secuencial y deben registrarse convenientemente.
+sistema.cargar_reservas(lista_solicitudes)
+
+3.3. Procesar siguiente solicitud Las solicitudes deben procesarse siguiendo la política
+FIFO (First In, First Out). Pasos para procesar una solicitud:
+    1. Tomar la siguiente solicitud en espera.
+    2. Validar tipoDeClase y numeroDia.
+    3. Crear la reserva con los datos de la solicitud (traduciendo numeroDia a dia).
+    4. Asociar la reserva al socio correspondiente.
+Mensajes esperados:
+●Datos correctos: "Reserva procesada para el socio con ID: xxxxxxxx con díalunes/martes/..."
+●Datos incorrectos: "Reserva incorrecta"
+●No hay solicitudes: "No hay reservas para procesar." sistema.procesar_siguiente_reserva()
+
+3.4. Gestionar membresías
+●Agregar nueva membresía: La nueva membresía se registra a continuación de la última agregada. Asuma que se agregará a lo sumo una membresía por 
+nombreMembresia.sistema.agregar_membresia(membresia)
+●Modificar membresía: Cambia el descuento de una membresía, dado su nombre.
+    ○Éxito: "Membresía modificada para el tipo nombre_membresia"
+    ○Membresía no encontrada: "Membresía no encontrada."
+    sistema.modificar_membresia(nombre_membresia,nuevo_descuento)
+●Eliminar membresía: Elimina la membresía de un tipo, dado su nombre.
+    ○Membresía no encontrada: "Membresía no encontrada."
+    sistema.eliminar_membresia(nombre_membresia)
+
+3.5. Generar estadísticas A partir de la tabla historial_clases (deSistemaDeReservas), que contiene un historial con datos de cada clase dictada:
+●Día: str desde "lunes" hasta "viernes"
+●TipoDeClase: "yoga","spinning","funcional","pilates"
+●CantidadSocios: int > 0
+●IngresoTotal: float > 0 (ingreso total de la clase)
+
+Se debe mostrar usando NumPy:
+●Promedio de ingreso total por día.
+●La clase que tuvo la mayor cantidad de socios.
+---------------------------------------------------0000000---------------------------------------------------------
+sistema.generar_estadisticas()
+Ejemplo de salida (basado en los datos provistos en la clase SistemaDeReservas):
+
+Promedio de ingreso por día:
+lunes: $17625.13
+martes: $17025.13
+miércoles: $19425.19
+jueves: $16350.00
+viernes: $18600.23
+
+Clase con mayor cantidad de socios:
+Día: viernes
+Tipo de clase: spinning
+Cantidad de socios: 16
+Ingreso: $24000.90
+
+------------------------------------------------------------------------------------------------------------------
+4. Aclaraciones importantes
+●Se le provee un esquema de clases implementado (Nodo y ListaEnlazada). Solo
+se pueden modificar estas clases respetando los principios POO. El resto de las
+clases (Socio, Reserva, SistemaDeReservas, etc.) se pueden extender (agregar
+atributos, métodos) pero no se pueden modificar (borrar atributos, cambiar firmas de
+métodos). Solamente debe implementar los métodos pedidos en el enunciado y las
+estructuras de datos necesarias para su correcto funcionamiento.
+●La resolución debe ser orientada a objetos, con las estrategias y técnicas vistas en
+la materia. No se aceptan resoluciones de programación estructurada si es posible
+aplicar una estrategia vista en la materia.
+●Se deben respetar los conceptos de modularidad, abstracción, encapsulamiento,
+herencia y polimorfismo.
+●Es obligatorio incluir un código principal que muestre cómo interactúan los objetos.
+El main debe probar fehacientemente todos los métodos y funcionalidades que
+surgen de la consigna.
+●El programa debe ejecutarse correctamente sin errores ni excepciones durante la
+prueba.
+●No se aceptará el uso de except genérico (por ejemplo, except: o except
+Exception:) para ocultar errores.
+●Si el programa contiene errores de ejecución (aunque estén atrapados por un
+except genérico), se descontarán 2 puntos.

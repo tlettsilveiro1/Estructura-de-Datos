@@ -55,8 +55,23 @@ class ListaEnlazada:
 				else:
 					actual = actual.siguiente
 			return False
-	
-    
+	def eliminar(self, dato):
+		if self.esVacia():
+			raise ValueError("La lista está vacía")
+		actual = self.inicio
+		previo = None
+		while actual:
+			if actual.dato == dato:
+				if previo is None:
+					self.inicio = actual.siguiente
+				else:
+					previo.siguiente = actual.siguiente
+				return True
+			previo = actual
+			actual = actual.siguiente
+		raise ValueError("Dato no encontrado")
+
+
 if __name__ == '__main__':
 	nodo1 = Nodo(1)
 	nodo2 = Nodo(2)

@@ -1,0 +1,43 @@
+"""
+Gestión de Playlist de Música con Navegación
+Bidireccional
+Contexto:
+Se desea construir un sistema de reproducción de música que permite navegar entre
+las canciones hacia adelante y hacia atrás fácilmente. Cada canción tiene título,
+artista y duración. Se debe poder agregar, eliminar canciones y moverse
+secuencialmente en ambas direcciones con eficiencia.
+
+Requisitos Funcionales:
+1. Agregar canciones en cualquier posición de la lista.
+2. Eliminar la canción actual o por posición.
+3. Navegar a la siguiente o anterior canción.
+4. Mostrar información actual de la canción activa.
+"""
+# Código Base:
+# class Cancion:
+# def __init__(self, titulo, artista, duracion):
+# self.titulo = titulo
+# self.artista = artista
+# self.duracion = duracion # en segundos
+# class Playlist:
+# def __init__(self):
+# self._canciones = None # Inicio de lista enlazada (nodo)
+# self._actual = None # Nodo canción actual
+# # Métodos a completar:
+# def agregar_cancion(self, cancion, posicion=None):
+# """Insertar canción en posición dada o final"""
+# def eliminar_cancion_actual(self):
+# """Eliminar canción activa actual"""
+# def siguiente(self):
+# """Avanzar a la siguiente canción"""
+# def anterior(self):
+# """Retroceder a la canción anterior"""
+# def mostrar_actual(self):
+# """Retorna tupla con datos (título, artista, duración) de canción actual"""
+"""
+Casos de Prueba:
+● Agregar 3 canciones, navegar hacia adelante y atrás, comprobar canciones
+actuales.
+● Eliminar canción en medio, revisar integridad.
+● Agregar canción en posición específica, validar secuencia.
+"""

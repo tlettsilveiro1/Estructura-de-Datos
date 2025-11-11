@@ -1,0 +1,33 @@
+Consigna
+Implementá un sistema orientado a objetos que simule una versión reducida de Instagram,
+cumpliendo los siguientes requerimientos.
+Clases obligatorias
+1. Usuario
+- Atributos:
+- nombre_usuario: este es único por usuario
+- tipo_cuenta → personal, business o blog
+- amigos
+- solicitudes_recibidas
+- posteos
+El usuario debería poder, al menos:
+- recibir_solicitud(otro_usuario:str)
+- aceptar_solicitud(): acepta la última solicitud recibida
+- eliminar_solicitud(): rechaza la última solicitud recibida
+- mostrar_amigos()
+- crear_posteo(contenido)
+- ver_mis_posteos(usuario): esta acción suele realizarse mucho por los usuarios, y se
+muestra de más viejo a más nuevo
+2. Posteo
+- Atributos: autor, contenido
+- Debería poder mostrarse con el siguiente formato: “Juan publicó: estoy estresado por el
+examen del lunes!”
+
+Ejemplo mínimo de uso esperado
+ana = Usuario("ana", "personal")
+juan = Usuario("juan", "business")
+juan.recibir_solicitud(“ana”)
+juan.mostrar_solicitudes()
+juan.aceptar_solicitud()
+ana.crear_posteo("Hermoso día para programar")
+ana.crear_posteo("Nuevo producto disponible!")
+ana.ver_mis_posteos()

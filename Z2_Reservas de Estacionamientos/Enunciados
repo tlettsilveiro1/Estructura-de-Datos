@@ -1,0 +1,28 @@
+Sistema de Gestión de Reservas en Estacionamiento
+Inteligente
+Contexto:
+Se desea crear un sistema que gestione las reservas de estacionamiento en un
+edificio inteligente. El sistema debe registrar vehículos identificados por una
+matrícula única, administrar el orden en que llegan y salen los vehículos, y mantener
+un conjunto actualizado de vehículos que tienen privilegios especiales para acceder
+sin espera.
+
+Requisitos Funcionales:
+1. Registrar un vehículo con matrícula y hora de llegada.
+2. Permitir asignar un lugar según orden de llegada y liberar el lugar cuando el
+vehículo sale.
+3. Mantener una colección sin duplicados de vehículos con privilegios
+especiales.
+4. Consultar rápidamente si un vehículo tiene privilegios.
+5. Reportar el orden actual de vehículos esperando lugar, y lista de privilegiados
+
+Casos de Prueba:
+Caso 1: Registro de 3 vehículos y consulta de orden de llegada
+Entrada: registrar A123, B456, C789
+Salida esperada: Orden llegada: [A123, B456, C789]
+Caso 2: Asignar lugar y liberar para vehículo B456, consultar orden restante
+Entrada: asignar lugar a A123, liberar lugar de B456
+Salida esperada: Orden llegada: [B456, C789]
+Caso 3: Añadir vehículos privilegiados y consulta de pertenencia
+Entrada: añadir A123, C789 a privilegiados, consulta B456
+Salida esperada: B456 no tiene privilegios, A123 y C789 sí.
