@@ -1,0 +1,49 @@
+Sistema de Gestión de Emergencias
+Se te solicita implementar un sistema para gestionar y coordinar las respuestas a emergencias en
+una ciudad. Este sistema debe incluir información sobre los recursos de emergencia disponibles:
+ambulancias, camiones de bomberos y patrullas policiales.
+
+Descripción de Recursos
+Cada tipo de recurso debe tener las siguientes propiedades:
+1. Ambulancias:
+    ○ ID de Ambulancia: Un identificador único que debe seguir el formato 'AM-xxx-yyy',
+donde 'xxx' representa tres letras y 'yyy' representa tres números.
+    ○ Estado: Puede ser "Disponible", "En Servicio", o "Fuera de Servicio".
+    ○ Número de Pacientes: Cantidad de pacientes a bordo (si corresponde).
+2. Camiones de Bomberos:
+    ○ ID de Camión: Un identificador único que debe seguir el formato 'CB-xxx-yyy',
+donde 'xxx' representa tres letras y 'yyy' representa tres números.
+    ○ Estado: Puede ser "Disponible", "En Servicio", o "Fuera de Servicio".
+    ○ Capacidad de Agua: Cantidad de agua disponible en el camión.
+3. Patrullas Policiales:
+    ○ ID de Patrulla: Un identificador único que debe seguir el formato 'PP-xxx-yyy', donde
+'xxx' representa tres letras y 'yyy' representa tres números.
+    ○ Estado: Puede ser "Disponible", "En Servicio", o "Fuera de Servicio".
+    ○ Número de Oficiales: Cantidad de oficiales a bordo.
+
+Funcionalidades del Sistema
+El sistema debe permitir a los usuarios realizar las siguientes acciones:
+1. Agregar Recursos: Permitir la inclusión de nuevos recursos, validando que los datos sean
+correctos y completos.
+2. Actualizar Estado: Cambiar el estado de un recurso (por ejemplo, de "Disponible" a "En
+Servicio")
+3. Eliminar Recursos: Facilitar la eliminación de recursos del sistema, asegurando que el
+recurso exista.
+4. Buscar Recursos: Proporcionar una función que permita buscar un recurso por su ID y
+mostrar su información detallada.
+5. Listar Recursos: Mostrar todos los recursos registrados, organizados por tipo.
+6. Generar Informe de Disponibilidad: Crear un informe que detalle la cantidad de recursos
+disponibles, en servicio y fuera de servicio, desglosado por tipo, almacenándose como
+archivo CSV.
+
+Validaciones
+El sistema debe incluir validaciones para asegurarse de que:
+● Cada ID de recurso es único y válido según los formatos requeridos.
+● El estado debe ser uno de los valores permitidos ("Disponible", "En Servicio", "Fuera de
+Servicio").
+● La capacidad de agua debe ser un número positivo, mientras que el número de pacientes
+en la ambulancia debe ser cero o un entero positivo y los oficiales debe ser un entero
+positivo.
+Excepciones
+El sistema debe lanzar excepciones adecuadas cuando las validaciones fallen, proporcionando
+mensajes claros que indiquen la naturaleza del error

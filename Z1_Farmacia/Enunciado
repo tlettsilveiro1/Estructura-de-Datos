@@ -1,0 +1,72 @@
+"""FarmaSoft
+Desarrolla un sistema para una farmacia que venda medicamentos “Con Receta” y de “Venta Libre”, aplicando completamente el 
+paradigma de Programación Orientada a Objetos (POO). Define las clases, atributos y métodos necesarios. El uso de POO debe 
+ser central en tu diseño..
+1. Medicamentos (4 ptos)
+Todo Medicamento tiene:
+- Un nombre (no vacío)
+- Un laboratorio (no vacío)
+- Un código de barras válido según normativa (usar función anexa)
+- Una fecha de vencimiento de tipo datetime.date, en el formato yyyy-mm-dd y futura
+Todo Medicamento con Receta (MedicamentoReceta) tiene, además:
+– Un registro sanitario alfanumérico, de mínimo 8 caracteres
+Todo Medicamento de Venta Libre (MedicamentoVL) tiene, además:
+- Una dosis recomendada (en mg)
+
+Nota: para validar los códigos de barra, deberás utilizar el siguiente snippet:"""
+@staticmethod 
+def validar_codigo_barras(codigo): 
+    """Validar código de barras farmacéutico (formato simplificado)""" 
+    if len(codigo) != 13 or not codigo.isdigit(): 
+        return False
+    # Algoritmo simplificado de validación EAN-13
+    suma_impar = sum(int(codigo[i]) for i in range(0, 12, 2))
+    suma_par = sum(int(codigo[i]) for i in range(1, 12, 2))
+    checksum = (10 - ((suma_impar + suma_par * 3) % 10)) % 10
+    
+    return checksum == codigo[-1]
+
+"""Todo medicamento debe poder mostrar una representación legible de sus atributos con el siguiente formato específico:
+
+Para Medicamento con Receta:
+Medicamento con Receta: [nombre] | Lab: [laboratorio] | Vence:
+[fecha_vencimiento] | Registro: [registro_sanitario] | Código: [codigo_barras]
+
+Para Medicamento de Venta Libre:
+Medicamento de Venta Libre: [nombre] | Lab: [laboratorio] | Vence: [fecha_vencimiento] | Dosis: [dosis_recomendada]mg | Código: [codigo_barras]
+
+Ejemplo:
+Medicamento con Receta: Amoxicilina 500mg | Lab: Bayer | Vence: 2025-12-31 | Registro: INVIMA12345A | Código: 1234567890128
+
+
+2. Farmacia (3 ptos)
+Deberás implementar un sistema de gestión para una farmacia que almacene de forma eficiente los medicamentos y provea las 
+siguientes funcionalidades:
+    – agregar_medicamento: suma un medicamento a la farmacia (teniendo en cuenta que no pueden haber dos medicamentos con el 
+mismo código de barras)
+    – eliminar_medicamento: elimina un medicamento a través del código de barras.
+    – buscar_medicamento: retorna el medicamento a través del código de barras.
+    – mostrar_medicamentos: muestra por pantalla toda la información de los medicamentos almacenados en la estructura subyacente,
+ordenados por fecha de vencimiento ascendente (primero el más próximo a vencerse). Si no hay medicamentos, imprime por pantalla 
+“No hay medicamentos en el inventario”.
+    – alerta_vencimientos: muestra los medicamentos próximos a vencerse según la cantidad de días especificados, indicando además
+la cantidad de días hasta vencerse. Si no se le pasa una cantidad de días específica, por defecto se consideran 30 días.
+
+Por ejemplo, si hoy es 01/06/2025: 
+=== MEDICAMENTOS QUE VENCEN EN 30 DÍAS ===
+Medicamento Venta Libre: Ibuprofeno 400mg | Lab: Genfar | Vence: 2025-06-16 | Dosis: 400.0mg | Código: 1234567890128 - Vence en 15 días
+Medicamento con Receta: Aspirina 100mg | Lab: Bayer | Vence: 2025-06-29 | Registro: INVIMA67890B | Código: 9876543210987 - Vence en 28 días
+
+Si no hay medicamentos próximos a vencer:
+No hay medicamentos que venzan en los próximos 30 días.
+
+    – guardar_en_csv: guarda toda la información de la estructura subyacente en un archivo con extensión “.csv”. En caso de 
+error al escribir el archivo, el mismo debe manejarse correctamente con un mensaje “Error al escribir el archivo .csv”. En
+caso de que no haya medicamentos almacenados, no debe generarse ningún archivo.
+
+Por ejemplo:
+Nombre,Laboratorio,Fecha de vencimiento,Tipo,Registro sanitario,Código,Dosis recomendada
+Ibuprofeno 400mg,Genfar,2025-06-16,Venta Libre,No tiene,1234567890128,400.0
+Aspirina 100mg,Bayer,2025-06-29,Con Receta,INVIMA67890B,9876543210987,No tiene
+(En este ejemplo, el Ibuprofeno 400mg es de venta libre, por eso en la columna “Registro sanitario” se escribe “No tiene”. Similarmente, la Aspirina 100mg se vende con receta, por eso “No tiene” dosis recomendada).
+Recuerde que: el programa deberá manejar correctamente el ingreso de datos erróneos."""
